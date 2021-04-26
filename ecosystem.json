@@ -1,0 +1,27 @@
+{
+  "apps" : [{
+     "name" : "vue-el-form-making",
+     "script" : "start.js",
+     "env": {
+       "COMMON_VARIABLE": "true"
+     },
+     "env_production": {
+       "NODE_ENV": "production"
+     }
+  }],
+  "deploy" : {
+    "production" : {
+      "user" : "root",
+      "host" : ["120.78.162.6"],
+      "post" : "22",
+      "ref"  : "origin/master",
+      "repo" : "git@github.com:HJianfeng/vue-el-form-making.git",
+      "path" : "/www/formMaking/production",
+      "ssh_options": "StrictHostKeyChecking=no",
+      "post-deploy" : "npm install && npm run build && pm2 startOrRestart ecosystem.json --env production",
+      "env": {
+        "NODE_ENV": "production"
+      }
+     }
+  }
+}
