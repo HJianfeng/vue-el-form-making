@@ -158,7 +158,7 @@
       ></el-slider>
     </template>
 
-    <template v-if="widget.type=='imgupload'">
+    <!-- <template v-if="widget.type=='imgupload'">
       <fm-upload
         v-model="dataModel"
         :disabled="widget.options.disabled"
@@ -176,7 +176,7 @@
         :action="widget.options.action"
       >
       </fm-upload>
-    </template>
+    </template> -->
 
     <template v-if="widget.type == 'editor'">
       <vue-editor
@@ -206,12 +206,12 @@
 </template>
 
 <script>
-import FmUpload from './Upload'
+// import FmUpload from './Upload'
 
 export default {
   props: ['widget', 'models', 'rules', 'remote'],
   components: {
-    FmUpload
+    // FmUpload
   },
   data () {
     return {

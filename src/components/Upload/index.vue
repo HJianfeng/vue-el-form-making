@@ -12,7 +12,7 @@
         :style="{width: width+'px', height: height+'px'}"
         :class="{uploading: item.status=='uploading', 'is-success': item.status=='success', 'is-diabled': disabled}"
         class="upload-file" v-for="(item) in fileList" :key="item.key">
-        <img :src="item.url" />
+        <img :src="item.url" alt=""/>
 
         <el-progress v-if="item.status=='uploading'" :width="miniWidth*0.9" class="upload-progress" type="circle" :percentage="item.percent"></el-progress>
 

@@ -34,7 +34,7 @@ export const girdTemplate = function(item) {
 
 export const genetateFormItem = function(widget) {
   const dataModel = `models[${widget.model}]`;
-  const width = (widget.options.width || widget.options.width === 0)?`{width: ${widget.options.width}}`:`''`;
+  const width = (widget.options.width || widget.options.width === 0)?`{width: '${widget.options.width}'}`:`''`;
   let formItem = '';
   if(widget.type === 'input') {
     if(widget.options.dataType == 'number' || widget.options.dataType == 'integer' || widget.options.dataType == 'float') {
