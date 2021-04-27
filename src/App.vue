@@ -21,11 +21,10 @@ export default {
 <style lang="scss">
 .fm-header{
   height: 50px;
-  box-shadow: 0 2px 10px rgba(70,160,252, 0.6);
+  box-shadow: 0 10px 10px rgba(240,242,245, 0.8);
   padding: 0 10px;
-  background-image: linear-gradient(to right,#1278f6,#00b4aa);
   position: relative;
-
+  background: #fff;
   .fm-logo{
     height: 26px;
     vertical-align: middle;
@@ -34,9 +33,9 @@ export default {
     display: inline-block;
     line-height: 50px;
     vertical-align: middle;
-    color: #fff;
+    color: #333;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
     opacity: 0.8;
     margin-left: 6px;
     cursor: pointer;
