@@ -99,6 +99,7 @@ $primary-background-color: #ecf5ff;
     .form-edit-widget-label{
       font-size: 12px;
       display: block;
+      padding: 0 3px;
       width: 48%;
       line-height: 26px;
       position: relative;
@@ -111,29 +112,11 @@ $primary-background-color: #ecf5ff;
       color: #333;
       border: 1px solid #F4F6FC;
   
+      cursor: move;
+      background: #F4F6FC;
       &:hover{
         color: $primary-color;
         border: 1px dashed $primary-color;
-      }
-  
-      &>a{
-        display: block;
-        cursor: move;
-        background: #F4F6FC;
-        border: 1px solid #F4F6FC;
-  
-        .icon{
-          margin-right: 6px;
-          margin-left: 8px;
-          font-size: 14px;
-          display: inline-block;
-          vertical-align: middle;
-        }
-  
-        span{
-          display: inline-block;
-          vertical-align: middle;
-        }
       }
     }
   }

@@ -13,7 +13,6 @@
             :disabled="element.options.disabled"
           ></el-input>
         </template>
-
         <template v-if="element.type == 'textarea'">
           <el-input type="textarea" :rows="5"
             v-model="element.options.defaultValue"
@@ -40,7 +39,6 @@
             <el-radio  
               :style="{display: element.options.inline ? 'inline-block' : 'block'}"
               :label="item.value" v-for="(item, index) in element.options.options" :key="item.value + index"
-              
             >
               {{element.options.showLabel ? item.label : item.value}}
             </el-radio>
@@ -145,20 +143,6 @@
           ></el-slider>
         </template>
 
-        <!-- <template v-if="element.type=='imgupload'">
-          <fm-upload
-            v-model="element.options.defaultValue"
-            :disabled="element.options.disabled"
-            :style="{'width': element.options.width}"
-            :width="element.options.size.width"
-            :height="element.options.size.height"
-            token="xxx"
-            domain="xxx"
-          >
-            
-          </fm-upload>
-        </template> -->
-
         <template v-if="element.type == 'cascader'">
           <el-cascader
             v-model="element.options.defaultValue"
@@ -196,24 +180,16 @@
         <div class="widget-view-drag" v-if="selectWidget.key == element.key">
           <i class="iconfont icon-drag drag-widget"></i>
         </div>
-        
     </el-form-item>
 </template>
 
 <script>
-// import FmUpload from './Upload'
 export default {
   props: ['element', 'select', 'index', 'data'],
-  components: {
-    // FmUpload,
-  },
   data () {
     return {
       selectWidget: this.select
     }
-  },
-  mounted () {
-    
   },
   methods: {
     handleSelectWidget (index) {

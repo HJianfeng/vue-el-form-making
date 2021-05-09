@@ -9,36 +9,36 @@
               <template v-if="basicFields.length">
                 <div class="widget-cate">基础字段</div>
                 <draggable tag="ul" :list="basicComponents" 
-                  v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
+                  :group="{ name: 'people', pull: 'clone', put: false }"
+                  :sort="false"
+                  ghostClass='ghost'
                   @end="handleMoveEnd"
                   @start="handleMoveStart"
                   :move="handleMove"
                 >
-                  
-                  <li v-if="basicFields.indexOf(item.type)>=0" class="form-edit-widget-label" :class="{'no-put': item.type == 'divider'}" v-for="(item, index) in basicComponents" :key="index">
-                    <a>
-                      <i class="icon iconfont" :class="item.icon"></i>
+                <template v-for="(item, index) in basicComponents">
+                  <li v-if="basicFields.indexOf(item.type)>=0" class="form-edit-widget-label" :key="index">
                       <span>{{item.name}}</span>
-                    </a>
                   </li>
+                </template>
                 </draggable>
               </template>
               
               <template v-if="advanceFields.length">
                 <div class="widget-cate">高级字段</div>
                 <draggable tag="ul" :list="advanceComponents" 
-                  v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
+                  :group="{ name: 'people', pull: 'clone', put: false }"
+                  :sort="false"
+                  ghostClass='ghost'
                   @end="handleMoveEnd"
                   @start="handleMoveStart"
                   :move="handleMove"
                 >
-                  
-                  <li v-if="advanceFields.indexOf(item.type) >= 0" class="form-edit-widget-label" :class="{'no-put': item.type == 'table'}" v-for="(item, index) in advanceComponents" :key="index">
-                    <a>
-                      <i class="icon iconfont" :class="item.icon"></i>
+                  <template v-for="(item, index) in advanceComponents">
+                    <li v-if="advanceFields.indexOf(item.type) >= 0" class="form-edit-widget-label"   :key="index">
                       <span>{{item.name}}</span>
-                    </a>
-                  </li>
+                    </li>
+                  </template>
                 </draggable>
               </template>
 
@@ -46,33 +46,29 @@
               <template v-if="layoutFields.length">
                 <div class="widget-cate">布局字段</div>
                 <draggable tag="ul" :list="layoutComponents" 
-                  v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
+                  :group="{ name: 'people', pull: 'clone', put: false }"
+                  :sort="false"
+                  ghostClass='ghost'
                   @end="handleMoveEnd"
                   @start="handleMoveStart"
                   :move="handleMove"
                 >
-                  
-                  <li v-if="layoutFields.indexOf(item.type) >=0" class="form-edit-widget-label no-put" v-for="(item, index) in layoutComponents" :key="index">
-                    <a>
-                      <i class="icon iconfont" :class="item.icon"></i>
-                      <span>{{item.name}}</span>
-                    </a>
+                <template v-for="(item, index) in layoutComponents" >
+                  <li v-if="layoutFields.indexOf(item.type) >=0" class="form-edit-widget-label data-grid" :key="index">
+                    <span>{{item.name}}</span>
                   </li>
+                </template>
                 </draggable>
               </template>
-              
             </div>
-            
           </el-aside>
           <!-- 中部预览 -->
           <el-container class="center-container" direction="vertical">
             <el-header class="btn-bar" style="height: 45px;">
               <slot name="action">
               </slot>
-              <el-button v-if="upload" type="text" size="medium" icon="el-icon-upload2" @click="handleUpload">导入JSON</el-button>
               <el-button v-if="clearable" type="text" size="medium" icon="el-icon-delete" @click="handleClear">清空</el-button>
               <el-button v-if="preview" type="text" size="medium" icon="el-icon-view" @click="handlePreview">预览</el-button>
-              <el-button v-if="generateJson" type="text" size="medium" icon="el-icon-tickets" @click="handleGenerateJson">生成JSON</el-button>
               <el-button v-if="generateCode" type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">生成代码</el-button>
             </el-header>
             <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
@@ -102,13 +98,11 @@
             form
           >
             <generate-form insite="true" @on-change="handleDataChange" v-if="previewVisible" :data="widgetForm" :value="widgetModels" :remote="remoteFuncs" ref="generateForm">
-
               <template v-slot:blank="scope">
                 Width <el-input v-model="scope.model.blank.width" style="width: 100px"></el-input>
                 Height <el-input v-model="scope.model.blank.height" style="width: 100px"></el-input>
               </template>
             </generate-form>
-
             <template slot="action">
               <el-button type="primary" @click="handleTest">获取数据</el-button>
               <el-button @click="handleReset">重置</el-button>
@@ -150,15 +144,15 @@
             form
             :action="false"
           >
-            <!-- <div id="codeeditor" style="height: 500px; width: 100%;">{{htmlTemplate}}</div> -->
-            <el-tabs type="border-card" style="box-shadow: none;" v-model="codeActiveName">
+            <div id="vuecodeeditor" style="height: 500px; width: 100%;">{{vueTemplate}}</div>
+            <!-- <el-tabs type="border-card" style="box-shadow: none;" v-model="codeActiveName">
               <el-tab-pane label="Vue Component" name="vue">
                 <div id="vuecodeeditor" style="height: 500px; width: 100%;">{{vueTemplate}}</div>
               </el-tab-pane>
               <el-tab-pane label="HTML" name="html">
                 <div id="codeeditor" style="height: 500px; width: 100%;">{{htmlTemplate}}</div>
               </el-tab-pane>
-            </el-tabs>
+            </el-tabs> -->
           </cus-dialog>
         </el-container>
       </el-main>
@@ -173,13 +167,12 @@ import FormConfig from './FormConfig'
 import WidgetForm from './WidgetForm'
 import CusDialog from './CusDialog'
 import GenerateForm from './GenerateForm'
-import Clipboard from 'clipboard'
 import {basicComponents, layoutComponents, advanceComponents} from './componentsConfig.js'
 import request from '../util/request.js'
 import generateCode from './generateCode.js'
 
 export default {
-  name: 'fm-making-form',
+  name: 'making-form-container',
   components: {
     Draggable,
     WidgetConfig,
@@ -310,10 +303,10 @@ export default {
       this.configTab = value
     },
     handleMoveEnd (evt) {
-      console.log('end', evt)
+      // console.log('end', evt)
     },
     handleMoveStart ({oldIndex}) {
-      console.log('start', oldIndex, this.basicComponents)
+      // console.log('start', oldIndex, this.basicComponents)
     },
     handleMove () {
       return true
@@ -333,42 +326,16 @@ export default {
     handleReset () {
       this.$refs.generateForm.reset()
     },
-    handleGenerateJson () {
-      this.jsonVisible = true
-      this.jsonTemplate = this.widgetForm
-      console.log(JSON.stringify(this.widgetForm))
-      this.$nextTick(() => {
-
-        const editor = ace.edit('jsoneditor')
-        editor.session.setMode("ace/mode/json")
-
-        if (!this.jsonClipboard) {
-          this.jsonClipboard = new Clipboard('.json-btn')
-          this.jsonClipboard.on('success', (e) => {
-            this.$message.success('复制成功')
-          })
-        }
-        this.jsonCopyValue = JSON.stringify(this.widgetForm)
-      })
-    },
     handleGenerateCode () {
-
       this.codeVisible = true
-      this.htmlTemplate = generateCode(JSON.stringify(this.widgetForm), 'html')
+      // this.htmlTemplate = generateCode(JSON.stringify(this.widgetForm), 'html')
       this.vueTemplate = generateCode(JSON.stringify(this.widgetForm), 'vue')
       this.$nextTick(() => {
-        const editor = ace.edit('codeeditor')
-        editor.session.setMode("ace/mode/html")
+        // const editor = ace.edit('codeeditor')
+        // editor.session.setMode("ace/mode/html")
 
         const vueeditor = ace.edit('vuecodeeditor')
         vueeditor.session.setMode("ace/mode/html")
-      })
-    },
-    handleUpload () {
-      this.uploadVisible = true
-      this.$nextTick(() => {
-        this.uploadEditor = ace.edit('uploadeditor')
-        this.uploadEditor.session.setMode("ace/mode/json")
       })
     },
     handleUploadJson () {
@@ -396,12 +363,6 @@ export default {
     clear () {
       this.handleClear()
     },
-    getJSON () {
-      return this.widgetForm
-    },
-    getHtml () {
-      return generateCode(JSON.stringify(this.widgetForm))
-    },
     setJSON (json) {
       this.widgetForm = json
       
@@ -415,17 +376,6 @@ export default {
     },
     handleDataChange (field, value, data) {
       console.log(field, value, data)
-    }
-  },
-  watch: {
-    widgetForm: {
-      deep: true,
-      handler: function (val) {
-        console.log(this.$refs.widgetForm)
-      }
-    },
-    '$lang': function (val) {
-      this._loadComponents()
     }
   }
 }
